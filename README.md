@@ -77,91 +77,17 @@ There are also some disadvantages:
 Requirements
 ------------
 
-The library is built using [Meson](http://mesonbuild.com/) and depends on [Boost.Fiber](https://www.boost.org/doc/libs/release/libs/fiber/doc/html/index.html),
-[libuv](http://libuv.org/) and (optionally)
-[Google Test](https://github.com/google/googletest). It also requires C++14. If
-C++17 is available, it will make use of it (specify -Dcpp_std=c++17 to meson).
-
-On Ubuntu 18.04, you can install dependencies with:
-
-    $ sudo apt install wget build-essential automake libtool pkg-config meson \
-        libboost-fiber-dev libgtest-dev
-
-You also need libuv, but the version in Ubuntu 18.04 is too old so you'll need
-to build and install it manually from source.
-
-On Arch Linux, you can install everything using pacman:
-
-    $ sudo pacman -S  pkg-config meson boost libuv gtest
-
-It's a good idea to also install ccache if rebuilding often.
+The library built using [CMake](https://cmake.org/) and using vcpkg for easier dependency manager in multi OSes.
+Install following package in vcpkg:
+- boost-fiber
+- boost-iostreams
+- libuv
 
 
 Building
 --------
 
-Use Meson:
-
-    $ meson -Dcpp_std=c++17 -Dbuildtype=release build
-    $ cd build
-    $ ninja test
-
-This builds the library and some example applications under build/examples/. It
-will also run all the unit tests. You can leave out cpp_std if you don't have
-a C++17 compatible compiler.
-
-
-Valgrind
---------
-
-If you built your Boost library with
-[valgrind=on](https://www.boost.org/doc/libs/release/libs/context/doc/html/context/stack/valgrind.html)
-set, you can enable the valgrind build option for fiberio to avoid valgrind
-warnings.
-
-Either add it when creating the build directory:
-
-    $ meson -Dvalgrind=true build
-
-or change the Meson configuration later:
-
-    $ cd build
-    $ meson configure -Dvalgrind=true
-
-Older versions of Meson works differently (read the manual).
-
-
-Test Coverage
--------------
-
-To get a coverage report, install lcov and build like this:
-
-    $ meson -Db_coverage=true build
-    $ cd build
-    $ ninja clean && ninja test && ninja coverage
-
-Simply repeat the last command to rebuild from scratch.
-
-There's also a script for generating coverage reports directly with lcov. To
-use it, change the last command to this instead:
-
-    $ ninja clean && ninja test && ../lcov.sh
-
-The lcov script generates better reports, since it won't include the example
-applications in the coverage. There are intentionally no tests for those.
-
-
-Building with Docker
---------------------
-
-For testing purposes, there are some Docker files and scripts for building
-inside Docker containers.
-
-You can build with all of those by running (from this directory):
-
-    $ ./ci/buildall.sh
-
-This builds both in Ubuntu 18.04 and Arch Linux and using GCC and Clang.
+Prefer using VSCode as the IDE, install C++ and CMake plugin.
 
 
 Example
