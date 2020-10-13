@@ -1,13 +1,13 @@
 #ifndef _FIBERIO_SRC_SERVER_SOCKET_IMPL_H_
 #define _FIBERIO_SRC_SERVER_SOCKET_IMPL_H_
 
+#include <uv.h>
 #include <fiberio/socket.hpp>
 #include <boost/fiber/all.hpp>
 #include <memory>
 #include <vector>
 #include <thread>
 #include <cstdint>
-#include <uv.h>
 
 namespace fiberio {
 

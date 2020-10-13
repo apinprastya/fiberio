@@ -1,51 +1,52 @@
 #ifndef _FIBERIO_SRC_SOCKET_IMPL_H_
 #define _FIBERIO_SRC_SOCKET_IMPL_H_
 
-#include <boost/fiber/all.hpp>
-#include<string>
 #include <uv.h>
+#include <boost/fiber/all.hpp>
+#include <string>
 
-namespace fiberio {
-
-class socket_impl
+namespace fiberio
 {
-public:
-    socket_impl();
 
-    ~socket_impl();
+    class socket_impl
+    {
+    public:
+        socket_impl();
 
-    void do_accept(uv_stream_t* server);
+        ~socket_impl();
 
-    void connect(const std::string& host, uint16_t port);
+        void do_accept(uv_stream_t *server);
 
-    std::size_t read(char* buf, std::size_t size);
+        void connect(const std::string &host, uint16_t port);
 
-    void write(const char* data, std::size_t len);
+        std::size_t read(char *buf, std::size_t size);
 
-    void close();
+        void write(const char *data, std::size_t len);
 
-    bool is_open();
+        void close();
 
-    void on_read_finished(int64_t nread);
+        bool is_open();
 
-    char* get_buf() { return buf_; }
+        void on_read_finished(int64_t nread);
 
-    int64_t get_len() { return len_; }
+        char *get_buf() { return buf_; }
 
-private:
-    void wait_for_read_to_finish();
+        int64_t get_len() { return len_; }
 
-    void shutdown();
+    private:
+        void wait_for_read_to_finish();
 
-    uv_loop_t* loop_;
-    uv_tcp_t tcp_;
-    boost::fibers::condition_variable_any cond_;
-    bool closed_ : 1;
-    bool reading_ : 1;
-    char* buf_;
-    int64_t len_;
-};
+        void shutdown();
 
-}
+        uv_loop_t *loop_;
+        uv_tcp_t tcp_;
+        boost::fibers::condition_variable_any cond_;
+        bool closed_ : 1;
+        bool reading_ : 1;
+        char *buf_;
+        int64_t len_;
+    };
+
+} // namespace fiberio
 
 #endif

@@ -1,11 +1,11 @@
 #ifndef _FIBERIO_SRC_SCHEDULER_H_
 #define _FIBERIO_SRC_SCHEDULER_H_
 
+#include <uv.h>
 #include <boost/fiber/all.hpp>
 #include <chrono>
 #include <deque>
 #include <mutex>
-#include <uv.h>
 
 namespace fiberio {
 
