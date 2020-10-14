@@ -11,7 +11,10 @@ add_library(fiberio
     utils.cpp
 )
 
-#target_link_libraries(fiberio PRIVATE ${Boost_LIBRARIES} unofficial::libuv::libuv ws2_32)
-target_link_libraries(fiberio PRIVATE ${Boost_LIBRARIES} unofficial::libuv::libuv)
+IF (WIN32)
+    target_link_libraries(fiberio PRIVATE ${Boost_LIBRARIES} unofficial::libuv::libuv ws2_32)
+ELSE()
+    target_link_libraries(fiberio PRIVATE ${Boost_LIBRARIES} unofficial::libuv::libuv)
+ENDIF()
 
 target_compile_features(fiberio PUBLIC cxx_std_17)
