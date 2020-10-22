@@ -3,7 +3,7 @@
 #endif
 
 #include "scheduler.hpp"
-#include "loop.hpp"
+#include <fiberio/loop.hpp>
 #include <algorithm>
 
 namespace fibers = boost::fibers;
